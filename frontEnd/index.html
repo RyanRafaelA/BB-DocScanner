@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 <title>Upload de Imagem</title>
 </head>
 <body>
 <h1>Upload de Imagem</h1>
-<form action="/upload-file" method="post" enctype="multipart/form-data">
-<input type="file" name="file" accept="image/*,.pdf">
-<button type="submit">Upload</button>
+<form action="/uploadfile/" method="post" enctype="multipart/form-data">  <!-- rota corrigida -->
+    <input type="file" name="file" accept="image/*,.pdf">
+    <button type="submit">Upload</button>
 </form>
 </body>
 </html>

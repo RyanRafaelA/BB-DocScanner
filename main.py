@@ -1,44 +1,57 @@
 from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
-import os
+from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
+from PIL import Image
+import pytesseract
+import io
 from pathlib import Path
+import os
 
 app = FastAPI()
 
-#pra acessar a imagem usa a porta http://127.0.0.1:8000/
-#para rodar a aplicação - uvicorn nome do arquivo:app
-
-UPLOAD_FOLDER = "static/files" # <- Pasta onde os arquivos vão ser guardados
+# Pasta onde os arquivos vão ser guardados
+UPLOAD_FOLDER = "static/files"
 Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 
 
 @app.get("/", response_class=HTMLResponse)
 def upload_form():
-    with open("frontEnd/index.html") as file: # <- Página de onde puxamos os arquivos
-        return file.read()
+    try:
+        with open("frontEnd/index.html") as file:  # Página de onde puxamos os arquivos
+            return file.read()
+    except FileNotFoundError:
+        return JSONResponse(content={"error": "HTML file not found"}, status_code=404)
 
 
-@app.post("/upload-file/")
-async def upload_file(file: UploadFile = File(...)): # <- Processamento de arquivos para upload
-    file_extension = file.filename.split(".")[-1]
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    # Definir o caminho completo para salvar o arquivo
+    file_path = os.path.join(UPLOAD_FOLDER, file.filename)
     
+    # Ler o arquivo enviado
+    contents = await file.read()
 
-    if file_extension not in ["png", "jpg", "jpeg", "pdf"]:     # <- Verifica se os arquivos são validos
-        return {"error": "File format not supported!"}
-    
-    
-    file_location = f"{UPLOAD_FOLDER}/{file.filename}"  # <- Salva o arquivo
-    with open(file_location, "wb+") as file_object:
-        file_object.write(await file.read())
-    
+    # Salvar o arquivo no diretório especificado
+    with open(file_path, "wb") as f:
+        f.write(contents)
 
-    return RedirectResponse(url=f"/files/{file.filename}", status_code=302)  # Redireciona automaticamente a imagem do arquivo sem precisar colocar a porta manualmente
+    # Verificar a extensão do arquivo
+    if file.filename.endswith('.pdf'):
+        return JSONResponse(content={"error": "PDF handling not implemented"})
+    elif file.filename.endswith(('.png', '.jpg', '.jpeg')):
+        # Abrir a imagem usando PIL
+        image = Image.open(io.BytesIO(contents))
+
+        # Aplicar OCR usando pytesseract
+        text = pytesseract.image_to_string(image)
+
+        return JSONResponse(content={"text": text})
+    else:
+        return JSONResponse(content={"error": "Unsupported file type"}, status_code=400)
 
 
-@app.get("/files/{file_name}")  # < - Servir arquivo carregado (imagem ou PDF)
+@app.get("/files/{file_name}")  # Servir arquivo carregado (imagem ou PDF)
 def get_file(file_name: str):
     file_path = os.path.join(UPLOAD_FOLDER, file_name)
     if os.path.exists(file_path):
         return FileResponse(file_path)
-    return {"error": "File not found"}
-
+    return JSONResponse(content={"error": "File not found"}, status_code=404)
