@@ -9,11 +9,11 @@ import os
 
 app = FastAPI()
 
-# Pasta onde os arquivos vão ser guardados
+# Definir a pasta onde os arquivos vão ser guardados
 UPLOAD_FOLDER = "static/files"
-Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 
-pytesseract.pytesseract.tesseract_cmd = "C:\\py-libs\\Tesseract-OCR\\Tesseract.exe"
+# Criar a pasta se não existir
+Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -29,7 +29,7 @@ def upload_form():
 async def create_upload_file(file: UploadFile = File(...)):
     # Definir o caminho completo para salvar o arquivo
     file_path = os.path.join(UPLOAD_FOLDER, file.filename)
-    
+
     # Ler o arquivo enviado
     contents = await file.read()
 
@@ -41,8 +41,11 @@ async def create_upload_file(file: UploadFile = File(...)):
     if file.filename.endswith('.pdf'):
         return JSONResponse(content={"error": "PDF handling not implemented"})
     elif file.filename.endswith(('.png', '.jpg', '.jpeg')):
-        # Abrir a imagem usando PIL
-        image = cv2.imread(io.BytesIO(contents))
+        # Abrir a imagem usando OpenCV (cv2.imread) a partir do arquivo salvo
+        image = cv2.imread(file_path)
+
+        if image is None:
+            return JSONResponse(content={"error": "Failed to read image"}, status_code=400)
 
         # Aplicar OCR usando pytesseract
         text = pytesseract.image_to_string(image, config="--psm 6")
