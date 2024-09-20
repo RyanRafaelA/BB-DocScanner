@@ -1,11 +1,10 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
-import pytesseract
 from pathlib import Path
-import cv2
 import os
 
-pytesseract.pytesseract.tesseract_cmd = "C:\\py-libs\\Tesseract-OCR\\Tesseract.exe"
+#esse vão ser os arquivos criados
+from resource.extration import imgToText
 
 app = FastAPI()
 
@@ -42,16 +41,13 @@ async def create_upload_file(file: UploadFile = File(...)):
     if file.filename.endswith('.pdf'):
         return JSONResponse(content={"error": "PDF handling not implemented"})
     elif file.filename.endswith(('.png', '.jpg', '.jpeg')):
-        # Abrir a imagem usando OpenCV (cv2.imread) a partir do arquivo salvo
-        image = cv2.imread(file_path)
-
-        if image is None:
-            return JSONResponse(content={"error": "Failed to read image"}, status_code=400)
-
-        # Aplicar OCR usando pytesseract
-        text = pytesseract.image_to_string(image, config="--psm 6")
+        text = imgToText(file_path)
         
-        return JSONResponse(content={"text": text})
+        if text is None:
+            JSONResponse(content={"error": "Failed to read image"}, status_code=400)
+        else:
+            return JSONResponse(content={"text": text})
+        
     else:
         return JSONResponse(content={"error": "Unsupported file type"}, status_code=400)
 
