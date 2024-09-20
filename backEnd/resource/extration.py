@@ -1,3 +1,4 @@
+import pymupdf
 import pytesseract
 import cv2
 
@@ -12,3 +13,13 @@ def imgToText(file_path):
 
         # Aplicar OCR usando pytesseract
         return pytesseract.image_to_string(image, config="--psm 6")
+    
+def pdfToText(file_path):
+    #abrindo o arquivo pelo pymupdf
+    doc = pymupdf.open(file_path)
+    
+    #depois que abriu o pdf e transformando em texto
+    for page in doc:
+        text = page.get_text().encode('utf8')
+    
+    return text

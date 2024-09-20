@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 
 #esse vão ser os arquivos criados
-from resource.extration import imgToText
+from resource.extration import imgToText, pdfToText
 
 app = FastAPI()
 
@@ -39,7 +39,10 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     # Verificar a extensão do arquivo
     if file.filename.endswith('.pdf'):
-        return JSONResponse(content={"error": "PDF handling not implemented"})
+        text = pdfToText(file_path)
+        
+        return JSONResponse(content={"text": text.decode('utf8')})
+        
     elif file.filename.endswith(('.png', '.jpg', '.jpeg')):
         text = imgToText(file_path)
         
