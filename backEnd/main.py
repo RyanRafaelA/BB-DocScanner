@@ -41,7 +41,7 @@ async def create_upload_file(file: UploadFile = File(...)):
     if file.filename.endswith('.pdf'):
         text = pdfToText(file_path)
         
-        return JSONResponse(content={"text": text.decode('utf8')})
+        return JSONResponse(content={"text": text})
         
     elif file.filename.endswith(('.png', '.jpg', '.jpeg')):
         text = imgToText(file_path)
