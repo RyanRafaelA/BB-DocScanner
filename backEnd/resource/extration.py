@@ -22,6 +22,12 @@ def pdfToText(file_path):
     
     #depois que abriu o pdf e transformando em texto
     for page in doc:
-        text += page.get_text().encode("utf8").decode("utf8")
-    
-    return text
+        page_text = page.get_text("text").encode("utf8").decode("utf8")     # Extraindo o texto da página
+        page_text = page_text.replace("\n", " ")                            # Removendo o \n da resposta
+        page_text = page_text.strip()                                       # Removendo os espacos em branco
+        text += page_text + "\n\n"                                          # Quebra de linha dupla para separar as paginas
+        
+    # Remover múltiplas quebras de linha consecutivas e manter apenas uma
+    formatted_text = "\n".join([line for line in text.splitlines() if line.strip()])
+
+    return formatted_text

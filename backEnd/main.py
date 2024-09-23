@@ -3,7 +3,6 @@ from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
 from pathlib import Path
 import os
 
-#esse vão ser os arquivos criados
 from resource.extration import imgToText, pdfToText
 
 app = FastAPI()
@@ -14,16 +13,14 @@ UPLOAD_FOLDER = "static/files"
 # Criar a pasta se não existir
 Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 
-
 @app.get("/", response_class=HTMLResponse)
 def upload_form():
     try:
         # Página de onde puxamos os arquivos
-        with open("C:\\Users\\Public\\faculdade\\residencia4\\BB-DocScanner\\frontEnd\\index.html") as file:  
+        with open("../frontEnd/index.html") as file:  
             return file.read()
     except FileNotFoundError:
         return JSONResponse(content={"error": "HTML file not found"}, status_code=404)
-
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
@@ -47,13 +44,12 @@ async def create_upload_file(file: UploadFile = File(...)):
         text = imgToText(file_path)
         
         if text is None:
-            JSONResponse(content={"error": "Failed to read image"}, status_code=400)
+            return JSONResponse(content={"error": "Failed to read image"}, status_code=400)
         else:
             return JSONResponse(content={"text": text})
         
     else:
         return JSONResponse(content={"error": "Unsupported file type"}, status_code=400)
-
 
 @app.get("/files/{file_name}")  # Servir arquivo carregado (imagem ou PDF)
 def get_file(file_name: str):
