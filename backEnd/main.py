@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
 from pathlib import Path
 import os
+import cv2
 
 from resource.extration import imgToText, pdfToText
 
@@ -41,7 +42,8 @@ async def create_upload_file(file: UploadFile = File(...)):
         return JSONResponse(content={"text": text})
         
     elif file.filename.endswith(('.png', '.jpg', '.jpeg')):
-        text = imgToText(file_path)
+        # Abrir a imagem usando OpenCV (cv2.imread) a partir do arquivo salvo, e mandando para o metodo imgToText()
+        text = imgToText(cv2.imread(file_path))
         
         if text is None:
             return JSONResponse(content={"error": "Failed to read image"}, status_code=400)
