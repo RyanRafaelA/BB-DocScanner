@@ -2,8 +2,13 @@ import pymupdf
 import pytesseract
 import cv2
 
-pytesseract.pytesseract.tesseract_cmd = "C:\\py-libs\\Tesseract-OCR\\Tesseract.exe"
-
+def configure_tesseract():
+    # Verifica se está instalado e disponível no sistema
+    tesseract_cmd = shutil.which("tesseract")
+    if tesseract_cmd is None:
+        raise EnvironmentError("Tesseract OCR não encontrado. Certifique-se de que ele está instalado e no PATH do sistema.")
+    
+    pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 def imgToText(file_path):
     # Abrir a imagem usando OpenCV (cv2.imread) a partir do arquivo salvo
     image = cv2.imread(file_path)
