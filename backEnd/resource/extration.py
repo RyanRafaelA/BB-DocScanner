@@ -1,6 +1,5 @@
 import pymupdf
 import pytesseract
-import cv2
 
 def configure_tesseract():
     # Verifica se está instalado e disponível no sistema
@@ -12,7 +11,7 @@ def configure_tesseract():
 def imgToText(file_path):
     # Abrir a imagem usando OpenCV (cv2.imread) a partir do arquivo salvo
     image = cv2.imread(file_path)
-
+    
     if image is None:
         return None
 
@@ -36,3 +35,11 @@ def pdfToText(file_path):
     formatted_text = "\n".join([line for line in text.splitlines() if line.strip()])
 
     return formatted_text
+
+def imgInAPdf(page):
+    text = ""
+    
+    image = page.get_images() # extraindo imagem de uma pagina pdf
+    text = imgToText(image) # enviando para o imgToText(), que vai trasnforma a imagem
+    
+    return text
