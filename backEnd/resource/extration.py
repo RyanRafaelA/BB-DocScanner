@@ -2,6 +2,8 @@ import fitz  # pymupdf é importado como fitz
 import pytesseract
 import cv2
 import shutil
+import concurrent.futures
+import numpy as np
 
 def configure_tesseract():
     # Verifica se o Tesseract está instalado e disponível no sistema
@@ -22,43 +24,47 @@ def imgToText(file_path):
     return pytesseract.image_to_string(image, config="--psm 6")
 
 def pdfToText(file_path):
-    text = ""
-    
-    # Abrindo o arquivo PDF com PyMuPDF
     doc = fitz.open(file_path)
-    
-    # Para cada página do PDF, extrair texto
+    text = ""
+
+    # Processar cada página do PDF
     for page_num in range(len(doc)):
         page = doc.load_page(page_num)
         
-        # Extrair imagens da página e processar com OCR, se necessário
+        # Extrair e tratar o texto da página
+        page_text = page.get_text("text").encode("utf8").decode("utf8")     # Extraindo o texto da página
+        page_text = page_text.replace("\n", " ")                            # Remover quebras de linha
+        page_text = page_text.strip()                                       # Remover espaços em branco
+        
+        # Adicionar quebra de linha dupla para separar as páginas
+        text += page_text + "\n\n"
+        
+        # Adicionar o texto extraído de imagens, se houver
         text += imgInAPdf(page)
 
-        # Extrair o texto direto da página (sem imagens)
-        page_text = page.get_text("text").encode("utf8").decode("utf8")
-        page_text = page_text.replace("\n", " ").strip()
-        text += page_text + "\n\n"  # Separar páginas com quebras de linha duplas
-
     # Remover múltiplas quebras de linha consecutivas e manter apenas uma
-    formatted_text = "\n".join([line for line in text.splitlines() if line.strip()])
+    formatted_text = " ".join([line for line in text.splitlines() if line.strip()])
 
     return formatted_text
+
 
 def imgInAPdf(page):
     text = ""
     image_list = page.get_images(full=True)
-    
+
     for img in image_list:
         xref = img[0]
         base_image = page.parent.extract_image(xref)
         image_bytes = base_image["image"]
-        image_filename = f"temp_img_{xref}.png"
         
-        # Salvar a imagem extraída temporariamente
-        with open(image_filename, "wb") as image_file:
-            image_file.write(image_bytes)
+        # Convertendo os bytes da imagem em uma matriz do NumPy
+        image_np_array = np.frombuffer(image_bytes, np.uint8)
         
-        # Realizar OCR na imagem
-        text += imgToText(image_filename)
-    
+        # Decodificar a imagem em memória usando o OpenCV
+        image = cv2.imdecode(image_np_array, cv2.IMREAD_COLOR)
+        
+        if image is not None:
+            # Realizar OCR na imagem
+            text += pytesseract.image_to_string(image, config="--psm 6")
+
     return text
