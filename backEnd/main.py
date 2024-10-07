@@ -17,7 +17,7 @@ Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 def upload_form():
     try:
         # Página de onde puxamos os arquivos
-        with open("../frontEnd/index.html") as file:
+        with open("../index.html") as file:
             return file.read()
     except FileNotFoundError:
         return JSONResponse(content={"error": "HTML file not found"}, status_code=404)
