@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-<title>Upload de Imagem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Upload de Imagem</title>
 </head>
+
 <body>
-<h1>Upload de Imagem</h1>
-<form action="/uploadfile/" method="post" enctype="multipart/form-data">  <!-- rota corrigida -->
-    <input type="file" name="file" accept="image/*,.pdf">
-    <button type="submit">Upload</button>
-</form>
+
+    <header>
+        <img id="img1-header" src="./Imagens/header/li_align-justify.png" alt="">
+        <img id="img2-header" src="./Imagens/header/Imagem15 1.png" alt="">
+        <h1>TechDoc |</h1>
+        <div class="links">
+            <a href="#">Digitalizar</a>
+            <a href="#">Ajuda</a>
+        </div>
+    </header>
+    <hr>
+
+    <section class="page-upload">
+
+        <div class="textos">
+            <div class="titulo">
+                <h1>Bem Vindo ao TechDoc</h1>
+            </div>
+    
+            <div class="descricao">
+                <h1>Tech Doc é um serviço que simplifica a análise de documentos, automatizando a extração e organização de informações. <span>Rápido, preciso e fácil de usar!</span></h1>
+            </div>
+        </div>
+
+        <h1>Upload de Imagem</h1>
+        <form action="/uploadfile/" method="post" enctype="multipart/form-data"> <!-- rota corrigida -->
+            <input type="file" name="file" accept="image/*,.pdf">
+            <button type="submit">Upload</button>
+        </form>
+    </section>
+
 </body>
 </html>
