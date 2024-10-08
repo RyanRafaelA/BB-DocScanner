@@ -24,9 +24,10 @@ Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 @app.get("/", response_class=HTMLResponse)
 def upload_form():
     try:
-        # Página de onde puxamos os arquivos
-        with open("../index.html") as file:
-            return file.read()
+        # Abrir o arquivo HTML com a codificação correta
+        with open("../index.html", encoding="utf-8") as file:
+            content = file.read()
+            return HTMLResponse(content=content, headers={"Content-Type": "text/html; charset=utf-8"})
     except FileNotFoundError:
         return JSONResponse(content={"error": "HTML file not found"}, status_code=404)
 
