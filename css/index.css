@@ -1,0 +1,63 @@
+/* Fontes  */
+
+/* Config */
+body{
+    background-color: #000423;
+    margin: 0;
+}
+
+:root {
+    font-size: 62.5%;
+}
+
+
+/* header  */
+
+header{
+color: #FFFFFF;
+display: flex;
+gap: 1rem;
+margin-left: 1rem;
+align-items: center;
+}
+
+#img1-header{
+    width: 2.5rem;
+}
+
+#img2-header{
+    width: 3.5rem;
+}
+
+header h1{
+    font-size: 2rem;
+}
+
+header a{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+hr {
+    border: none; 
+    height: 0.5rem;
+    background-color: #FCFC30; 
+    margin: 0; 
+}
+
+/* pagina de upload  */
+.page-upload{
+    margin-top: 20rem;
+}
+
+.titulo h1{
+    color: #FCFC30;
+    font-size: 3rem;
+}
+
+.descricao h1{
+    color: #FFFFFF;
+    font-size: 2rem;
+}
