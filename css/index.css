@@ -31,12 +31,14 @@ align-items: center;
 
 header h1{
     font-size: 2rem;
+    font-family: "Montserrat", serif;
 }
 
 header a{
     text-decoration: none;
     color: #FFFFFF;
     font-size: 1.5rem;
+    font-family: "Montserrat", serif;
     margin-left: 0.5rem;
 }
 
@@ -49,15 +51,56 @@ hr {
 
 /* pagina de upload  */
 .page-upload{
-    margin-top: 20rem;
+    margin-top: 10rem;
+    margin-left: 5rem;
 }
 
 .titulo h1{
     color: #FCFC30;
     font-size: 3rem;
+    font-family: "Montserrat", serif;
 }
 
 .descricao h1{
     color: #FFFFFF;
     font-size: 2rem;
+    width: 60rem;
+    font-weight: 200;
+    font-family: "Montserrat", serif;
+}
+
+.descricao h1 span{
+    color: #FCFC30;
+}
+
+form{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FCFC30;
+    border-radius: 5px;
+    padding: 10px;
+    color: #FCFC30;
+    font-family: "Montserrat", serif;
+    cursor: pointer;
+    display: block;
+    width: 30rem;
+    height: 15rem;
+}
+
+form button{
+    width: 32.5rem;
+    color: #ffff00;
+    background-color: #467DC3;
+    height: 3rem;
+    border-radius: 0.8rem;
+    border: none;
+    font-family: "Montserrat", serif;
 }
