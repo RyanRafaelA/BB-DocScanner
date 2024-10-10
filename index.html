@@ -20,7 +20,7 @@
     <header>
         <img id="img1-header" src="./Imagens/header/li_align-justify.png" alt="">
         <img id="img2-header" src="./Imagens/header/Imagem15 1.png" alt="">
-        <h1>TechDoc |</h1>
+        <h1>TechDoc</h1><span>|</span>
         <div class="links">
             <a href="#">Digitalizar</a>
             <a href="#">Ajuda</a>
@@ -30,22 +30,45 @@
 
     <section class="page-upload">
 
-        <div class="textos">
-            <div class="titulo">
-                <h1>Bem Vindo ao TechDoc</h1>
+        <div class="informacoes">
+            <div class="textos">
+                <div class="titulo">
+                    <h1>Bem Vindo ao TechDoc</h1>
+                </div>
+    
+                <div class="descricao">
+                    <h1>Tech Doc é um serviço que simplifica a análise de documentos, automatizando a extração e organização
+                        de informações. <span>Rápido, preciso e fácil de usar!</span></h1>
+                </div>
             </div>
-
-            <div class="descricao">
-                <h1>Tech Doc é um serviço que simplifica a análise de documentos, automatizando a extração e organização
-                    de informações. <span>Rápido, preciso e fácil de usar!</span></h1>
-            </div>
+    
+            <form action="/uploadfile/" method="post" enctype="multipart/form-data"> <!-- rota corrigida -->
+                <input type="file" name="file" accept="image/*,.pdf"><br>
+                <button type="submit">UPLOAD</button>
+            </form>
         </div>
 
-        <form action="/uploadfile/" method="post" enctype="multipart/form-data"> <!-- rota corrigida -->
-            <input type="file" name="file" accept="image/*,.pdf"><br>
-            <button type="submit">UPLOAD</button>
-        </form>
+        <div class="img-principal">
+            <img src="./Imagens/pg-principal/img pg-principal.png" alt="">
+        </div>
     </section>
+
+    <footer>
+       <div class="infomacoes-footer">
+        <h1>© Banco do Brasil S/A - CNPJ 00.000.000/0001-91 SAUN QD 5 LT <br>B, Asa Norte, Brasília-DF, Brasil - CEP 70040-911</h1>
+       </div>
+
+       <div class="termos-e-responsabilidades">
+        <img src="./Imagens/footer/img-termos e responsabilidades.png" alt="">
+        <h1>Termo de Responsabilidade</h1>
+       </div>
+
+       <div class="Código-de-Ética-e-Normas-de-Conduta">
+        <img src="./Imagens/footer/codigo de etica.png" alt="">
+        <h1>Código de Ética e Normas de Conduta</h1>
+        <hr class="linha-footer">
+       </div>
+    </footer>
 
 </body>
 
