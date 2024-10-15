@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
+from fastapi.responses import JSONResponse, HTMLResponse, FileResponse #importações da API
 from pathlib import Path
 from starlette.staticfiles import StaticFiles
 import os
@@ -7,12 +7,15 @@ import os
 
 from resource.extration import imgToText, pdfToText
 
-app = FastAPI()
+app = FastAPI() #Inicialização da API
 
 css_directory = os.path.abspath("../css")  # Caminho para a pasta css fora de backEnd
 app.mount("/css", StaticFiles(directory=css_directory), name="css")
 
-images_directory = os.path.abspath("../Imagens")  # Ajuste o caminho conforme necessário
+js_directory = os.path.abspath("../Js")  # Caminho para a pasta Js fora de backEnd
+app.mount("/Js", StaticFiles(directory=js_directory), name="Js")
+
+images_directory = os.path.abspath("../Imagens")  # Caminho para a pasta imagens fora de backEnd
 app.mount("/Imagens", StaticFiles(directory=images_directory), name="Imagens")
 
 # Definir a pasta onde os arquivos vão ser guardados
