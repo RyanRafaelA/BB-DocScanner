@@ -1,0 +1,41 @@
+@media(min-width: 320px) and (max-width: 720px){
+
+    /* Pagina de upload  */
+    .page-upload {
+        margin-left: 2rem;
+    }
+
+    .informacoes{
+        margin-top: 5rem;
+    }
+
+    .titulo h1 {
+        font-size: 2rem;
+    }
+
+    .descricao h1 {
+        font-size: 1.5rem;
+        width: 30rem;
+    }
+
+    .img-principal img {
+        display: none;
+    }
+
+    input[type="file"] {
+        margin: auto;
+        width: 20rem;
+        height: 15rem;
+    }
+
+    form button {
+        width: 25rem;
+    }
+
+    /* parte do footer  */
+
+    footer{
+        display: none;
+    }
+    
+}
