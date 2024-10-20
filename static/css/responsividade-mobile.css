@@ -28,8 +28,19 @@
         height: 15rem;
     }
 
+    form{
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+
     form button {
         width: 25rem;
+    }
+
+    #message{
+        width: 20rem;
+        margin: auto;
     }
 
     /* parte do footer  */

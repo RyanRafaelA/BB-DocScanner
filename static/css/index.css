@@ -174,7 +174,7 @@ hr {
 }
 
 .informacoes{
-    margin-top: 10rem;
+    margin-top: 2.5rem;
 }
 
 .titulo h1 {
@@ -240,6 +240,23 @@ form button {
 form button:hover{
     background-color: #FCFB2F;
     color: #000423;
+}
+
+#message{
+    resize: none;
+    width: 31rem;
+    border: 2px solid #FCFC30;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #FCFC30;
+    font-family: "Montserrat", serif;
+    padding: 0.5rem;
+}
+
+#message:focus {
+    border-color: #467DC3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, .6); /* Sombra ao redor */
 }
 
 
