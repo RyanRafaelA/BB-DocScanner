@@ -1,8 +1,4 @@
-INSTALAÇÕES NECESSARIAS 
-#instalar as dependencias pip install flask pytesseract PyPDF2
-
-#rodar a aplicação python app.py
-
+INSTALAÇÕES NECESSARIAS:
 #instalar o spacy pip install spacy
 
 #baixar a linguagem em portugues python -m spacy download pt_core_news_sm
@@ -10,6 +6,21 @@ INSTALAÇÕES NECESSARIAS
 #instalar o Pillow pip install pdf2image Pillow
 
 #instalar o PyMuPDF pip install PyMuPDF
+
+
+
+INSTALAR .VENV:
+python -m venv .venv - Serve para criar uma venv (Só usado caso não tenha a pasta, mas não rode esse codigo!)
+
+.\.venv\Scripts\activate - Serve para ativar a venv, utilize esse codigo para fazer as aplicações funcionarem
+
+pip install flask pytesseract PyPDF2 spacy - Instalar as dependencias
+
+python -m spacy download pt_core_news_sm - Para ficar em português
+
+python -m spacy validate - Verificar a instalação
+
+#rodar a aplicação python app.py
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
