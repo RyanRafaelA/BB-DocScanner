@@ -7,6 +7,14 @@ INSTALAÇÕES NECESSARIAS:
 
 #instalar o PyMuPDF pip install PyMuPDF
 
+#pip install pandas scikit-learn joblib
+
+#pip install apache-airflow
+
+#pip install spacy-lookups-data
+
+
+
 
 
 INSTALAR .VENV:
