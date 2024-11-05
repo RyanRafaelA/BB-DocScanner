@@ -18,8 +18,12 @@
   },
   "labels":{
     "ner":[
+      "CHAVE_ACESSO",
       "CPF",
-      "PAGADOR"
+      "PAGADOR",
+      "PESO_BRUTO",
+      "PESO_LIQUIDO",
+      "VALOR_TOTAL"
     ]
   },
   "pipeline":[
