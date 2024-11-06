@@ -17,7 +17,7 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
 # Carregando o modelo de linguagem da spaCy
-nlp = spacy.load("pt_core_news_sm")
+nlp = spacy.load("./ner_model")
 
 # Rota para a página principal que exibe o formulário
 @app.route('/')

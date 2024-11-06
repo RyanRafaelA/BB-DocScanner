@@ -48,5 +48,46 @@
     footer{
         display: none;
     }
-    
+
+/*result*/
+
+.info-documento {
+    width: 24rem;
+    margin-left: 12rem;
 }
+
+input {
+    margin-left: 10rem;
+}
+
+.titulo-info {
+    margin-left: 7rem;
+}
+
+.botoes {
+    margin-left: 11rem;
+    margin-top: 1rem;
+}
+
+.botoes button {
+    padding: 1rem 1.2rem;
+    font-size: 1.4rem;
+}
+
+footer {
+    height: 7rem;
+    display: flex;
+    text-align: center;
+}
+
+.infomacoes-footer h1{
+    font-size: 1.2rem;
+}
+
+.termos-e-responsabilidades{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+ }
+

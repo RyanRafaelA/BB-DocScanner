@@ -7,6 +7,14 @@ INSTALAÇÕES NECESSARIAS:
 
 #instalar o PyMuPDF pip install PyMuPDF
 
+#pip install pandas scikit-learn joblib
+
+#pip install apache-airflow
+
+#pip install spacy-lookups-data
+
+
+
 
 
 INSTALAR .VENV:
@@ -49,7 +57,7 @@ Se o usuário solicitar "cpf" ou "cnpj": Os CPFs/CNPJs do pagador e do recebedor
 
 ESTRUTURA DE PASTAS:
 
-NÃO MEXEM POR CONTA PROPIA, POIS PODE GERAR PROBLEMAS.
+NÃO MEXEM POR CONTA PROPRIA, POIS PODE GERAR PROBLEMAS.
 
 .venv - Configurações da API e deve aparecer quando fazer as instalações que tá no topo (aparece sozinha).
 
