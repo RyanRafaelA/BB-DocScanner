@@ -1,24 +1,7 @@
-INSTALAÇÕES NECESSARIAS:
-#instalar o spacy pip install spacy
-
-#baixar a linguagem em portugues python -m spacy download pt_core_news_sm
-
-#instalar o Pillow pip install pdf2image Pillow
-
-#instalar o PyMuPDF pip install PyMuPDF
-
-#pip install pandas scikit-learn joblib
-
-#pip install apache-airflow
-
-#pip install spacy-lookups-data
-
-
-
-
-
 INSTALAR .VENV:
-python -m venv .venv - Serve para criar uma venv (Só usado caso não tenha a pasta, mas não rode esse codigo!)
+Caso a venv esteja previamente instalada no projeto, delete-a e crie uma na sua maquina.
+
+python -m venv .venv - Serve para criar uma venv 
 
 .\.venv\Scripts\activate - Serve para ativar a venv, utilize esse codigo para fazer as aplicações funcionarem
 
@@ -29,6 +12,20 @@ python -m spacy download pt_core_news_sm - Para ficar em português
 python -m spacy validate - Verificar a instalação
 
 #rodar a aplicação python app.py
+
+INSTALAÇÕES NECESSARIAS:
+
+#instalar o Pillow pip 
+install pdf2image Pillow
+
+#instalar o PyMuPDF 
+pip install PyMuPDF
+
+#pip install pandas scikit-learn joblib
+
+#pip install apache-airflow
+
+#pip install spacy-lookups-data
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
