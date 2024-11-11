@@ -18,8 +18,11 @@
   },
   "labels":{
     "ner":[
+      "CEP_CONSUMIDOR",
       "CHAVE_ACESSO",
       "CPF",
+      "EMAIL_INSTITUCIONAL",
+      "NOME_CONSUMIDOR",
       "PAGADOR",
       "PESO_BRUTO",
       "PESO_LIQUIDO",
