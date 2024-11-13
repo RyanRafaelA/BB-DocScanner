@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <!-- fontes usadas -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- fontes usadas -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="../static/css/result.css"> <!--Pasta css-->
     <link rel="stylesheet" href="../static/css/responsividade-mobile.css"> <!--Pasta de responsividade-->
-    
+
     <title>Resultado</title>
 </head>
 
-<body> 
+<body>
 
     <header>
         <div class="off-screen-menu"> <!--Menu de navegação na forma hamburguer, quando é ativado-->
@@ -23,20 +24,22 @@
                 <li><a href="#ajuda">Ajuda</a></li>
                 <li><a href="#termo">Termo de Responsabilidade</a></li>
                 <li><a href="#normas">Código de Ética e Normas de Conduta</a></li>
-                </ul>
-            </div>
+            </ul>
+        </div>
 
-            <div class="ham-menu"> <!--Botão para ativar o menu hamburguer-->
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
-            <!--Logo do BB e nome da Aplicação-->
-            <img id="img1-header" src="../static/Imagens/header/Imagem15 1.png" alt="">
+        <div class="ham-menu"> <!--Botão para ativar o menu hamburguer-->
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!--Logo do BB e nome da Aplicação-->
+        <img id="img1-header" src="../static/Imagens/header/Imagem15 1.png" alt="">
+        <a href="/">
             <h1>TechDoc</h1>
+        </a>
     </header>
-    
+
     <hr> <!-- Linha horizontal para separar o cabeçalho -->
 
     <section class="fundo-azul">
@@ -45,30 +48,27 @@
             <h1> <img src="../static/Imagens/result/li_file-search.png" alt="file-search">Resultados </h1>
         </div>
 
-        <!-- Caixa de busca, onde o usuário pode digitar uma nova pesquisa -->
-        <div class="caixa-texto">
-            <input type="text" placeholder="Precisa de algo mais?">
-            <button class="input-button"> <img src="../static/Imagens/result/li_arrow-right.png" alt="li-arrow"> </button>
-        </div>
-    
         <!-- Título informativo -->
         <div class="titulo-info">
             <img src="../static/Imagens/result/li_info@2x.png" alt="imagem informação">
             <h2>Resumo das Informações</h2>
         </div>
-   
+
         <!-- Área onde o resultado das informações aparecerá -->
         <div class="info-documento">
-            <!--<p>{{ result }}</p> --> 
+            <p>{{ result }}</p>
         </div>
-
+        
         <!-- Botões -->
         <div class="botoes">
-            <button id="adicionar-doc"> <img src="../static/Imagens/result/li_plus.png" alt="">Adicionar Documento</button>
-            <button id="nova-pesquisa">Nova Pesquisa <img src="../static/Imagens/result/li_arrow-right.png" alt=""></button>
-            <button id="sair"> <img src="../static/Imagens/result/li_x.png" alt="">Sair</button>
-        </div>
-    </section>  
+            <a href="/" style="text-decoration: none;">
+                <button id="nova-pesquisa">Nova Pesquisa <img src="../static/Imagens/result/li_arrow-right.png" alt=""></button>
+            </a>
+            <a href="/" style="text-decoration: none;">
+                <button id="sair"> <img src="../static/Imagens/result/li_x.png" alt="">Sair</button>
+            </a>
+            </div>
+        </section>
 
     <footer> <!--Rodape com algumas informações-->
         <div class="infomacoes-footer">
@@ -84,11 +84,11 @@
         <div class="Código-de-Ética-e-Normas-de-Conduta">
             <img src="../static/Imagens/footer/codigo de etica.png" alt="">
             <h1>Código de Ética e Normas de Conduta</h1>
-            <hr class="linha-footer">
         </div>
     </footer>
 
-    <script src="../static/Js/hamburguer.js"></script>  <!--Script do menu hamburguer-->
+    <script src="../static/Js/hamburguer.js"></script> <!--Script do menu hamburguer-->
 
-  </body>
+</body>
+
 </html>
