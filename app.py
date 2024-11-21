@@ -17,7 +17,7 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
 # Carregando o modelo de linguagem da spaCy
-nlp = spacy.load("./ai/ner_model")
+nlp = spacy.load("pt_core_news_sm")
 
 # Rota para a página principal que exibe o formulário
 @app.route('/')
@@ -74,36 +74,55 @@ def search_information(extracted_text, query):
             results.append(f"Nome do Pagador: {names[0].strip()}")
             results.append(f"Nome do Recebedor: {names[-1].strip()}")
 
-    # Outras buscas como CPF, valor, etc.
-    if "cpf" in query.lower() or "cnpj" in query.lower():
-        cpf_match = re.findall(r'cpf/cnpj:\s*(\S+)', extracted_text)
-        if cpf_match:
-            results.extend([f"CPF/CNPJ: {cpf}" for cpf in cpf_match])
+    # Busca por CNPJ
+    if "cnpj" in query.lower():
+        cnpj_match = re.findall(r'cnpj / cpf:\s*(\S+)', extracted_text)
+        if cnpj_match:
+            results.append(f"CNPJ: {cnpj_match[0]}")
 
+    # Busca por número da nota fiscal
+    if "número da nota" in query.lower() or "número nf" in query.lower():
+        nf_number = re.findall(r'nf-e\s*nº\.\s*(\S+)', extracted_text)
+        if nf_number:
+            results.append(f"Número da Nota Fiscal: {nf_number[0]}")
+
+    # Busca por valor
     if "valor" in query.lower():
-        value = re.findall(r'valor:\s*r\$\s?(\d+,\d{2})', extracted_text)
+        value = re.findall(r'valor total:\s*r\$\s?(\d+,\d{2})', extracted_text)
         if value:
-            results.append(f"Valor: R$ {value[0]}")
+            results.append(f"Valor Total: R$ {value[0]}")
 
-    if "instituição" in query.lower():
-        institution_matches = re.findall(r'instituição:\s*(.*)', extracted_text)
-        if institution_matches:
-            results.append(f"Instituições: {', '.join(institution_matches)}")
+    # Busca por data de emissão
+    if "data de emissão" in query.lower():
+        emission_date = re.findall(r'data da emissão\s*(\d{2}/\d{2}/\d{4})', extracted_text)
+        if emission_date:
+            results.append(f"Data de Emissão: {emission_date[0]}")
 
-    if "data" in query.lower():
-        date_time = re.findall(r'data e hora:\s*(\d{2}/\d{2}/\d{4}\s*-\s*\d{2}:\d{2}:\d{2})', extracted_text)
-        if date_time:
-            results.append(f"Data e Hora: {date_time[0]}")
+    # Busca por destinatário (Nome e Endereço)
+    if "destinatário" in query.lower():
+        recipient_name = re.findall(r'destinatário:\s*(.*?)(?=\s*-)', extracted_text)
+        recipient_address = re.findall(r'endereço\s*(.*?)(?=\s*cep)', extracted_text)
+        if recipient_name and recipient_address:
+            results.append(f"Destinatário: {recipient_name[0].strip()}")
+            results.append(f"Endereço: {recipient_address[0].strip()}")
 
-    if "identificador" in query.lower():
-        identifier = re.findall(r'identificador:\s*(\S+)', extracted_text)
-        if identifier:
-            results.append(f"Identificador: {identifier[0]}")
+    # Busca por forma de pagamento
+    if "forma de pagamento" in query.lower():
+        payment_method = re.findall(r'forma de pagamento\s*:\s*(\S+)', extracted_text)
+        if payment_method:
+            results.append(f"Forma de Pagamento: {payment_method[0]}")
 
-    if "chave vinculada" in query.lower():
-        linked_key = re.findall(r'chave vinculada:\s*(\S+)', extracted_text)
-        if linked_key:
-            results.append(f"Chave Vinculada: {linked_key[0]}")
+    # Busca por chave de acesso
+    if "chave de acesso" in query.lower():
+        access_key = re.findall(r'chave de acesso\s*(\S+)', extracted_text)
+        if access_key:
+            results.append(f"Chave de Acesso: {access_key[0]}")
+
+    # Busca por informações complementares
+    if "informações complementares" in query.lower():
+        additional_info = re.findall(r'informações complementares\s*([\s\S]+)', extracted_text)
+        if additional_info:
+            results.append(f"Informações Complementares: {additional_info[0].strip()}")
 
     # Retornar as informações encontradas
     if not results:
