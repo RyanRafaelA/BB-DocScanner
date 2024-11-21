@@ -60,19 +60,25 @@ def search_information(extracted_text, query):
 
     # Busca por informações do pagador ou recebedor com base na consulta
     if "nome de quem pagou" in query.lower() or "quem pagou" in query.lower():
-        name_payer = re.findall(r'nome:\s*(.*?)(?=\s*cnpj)', extracted_text)  # Considera até o próximo CNPJ
+        name_payer = re.findall(r'nome:\s*(.*)', extracted_text)
         if name_payer:
             results.append(f"Nome do Pagador: {name_payer[0].strip()}")  # Primeiro nome encontrado
     elif "nome de quem recebeu" in query.lower() or "quem recebeu" in query.lower():
-        name_receiver = re.findall(r'nome\s*\/\s*razão social\s*(.*?)(?=\s*cnpj)', extracted_text)
+        name_receiver = re.findall(r'nome:\s*(.*)', extracted_text)
         if name_receiver:
-            results.append(f"Nome do Recebedor: {name_receiver[0].strip()}")  # Nome após cnpj
+            results.append(f"Nome do Recebedor: {name_receiver[-1].strip()}")  # Último nome encontrado
     elif "todos os nomes" in query.lower():  # Se o usuário pedir apenas "nome"
-        names = re.findall(r'nome:\s*(.*?)(?=\s*cnpj)', extracted_text)
+        names = re.findall(r'nome:\s*(.*)', extracted_text)
         if names:
             # Caso o usuário não especifique, retorna tanto o pagador quanto o recebedor
             results.append(f"Nome do Pagador: {names[0].strip()}")
             results.append(f"Nome do Recebedor: {names[-1].strip()}")
+
+    # Busca por CPF
+    if "cpf" in query.lower():
+        cpf_match = re.findall(r'cpf:\s*(\d{11})', extracted_text)
+        if cpf_match:
+            results.append(f"CPF: {cpf_match[0]}")
 
     # Busca por CNPJ
     if "cnpj" in query.lower():
@@ -80,37 +86,77 @@ def search_information(extracted_text, query):
         if cnpj_match:
             results.append(f"CNPJ: {cnpj_match[0]}")
 
-    # Busca por número da nota fiscal
     if "número da nota" in query.lower() or "número nf" in query.lower():
         nf_number = re.findall(r'nf-e\s*nº\.\s*(\S+)', extracted_text)
         if nf_number:
             results.append(f"Número da Nota Fiscal: {nf_number[0]}")
 
-    # Busca por valor total da nota
+    # Busca por telefone
+    if "telefone" in query.lower():
+        phone_match = re.findall(r'telefone:\s*(\d{11})', extracted_text)
+        if phone_match:
+            results.append(f"Telefone: {phone_match[0]}")
+
+    # Busca por endereço
+    if "endereço" in query.lower():
+        address_match = re.findall(r'endereço:\s*(.*?)\n', extracted_text)
+        if address_match:
+            results.append(f"Endereço: {address_match[0].strip()}")
+
+    # Busca por e-mail - ajuste aqui para capturar o e-mail completo
+    if "e-mail" in query.lower():
+        email_match = re.findall(r'e-mail:\s*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})', extracted_text)
+        if email_match:
+            results.append(f"E-mail: {email_match[0]}")
+
+    # Busca por número do protocolo
+    if "número do protocolo" in query.lower():
+        protocol_match = re.findall(r'protocolo/cip:\s*(\S+)', extracted_text)
+        if protocol_match:
+            results.append(f"Número do Protocolo: {protocol_match[0]}")
+
+    # Busca por nome do consumidor
+    if "nome do consumidor" in query.lower():
+        consumer_name = re.findall(r'ref\.\s*:\s*(.*?)\n', extracted_text)
+        if consumer_name:
+            results.append(f"Nome do Consumidor: {consumer_name[0].strip()}")
+
+    # Busca por descrição do problema
+    if "descrição do problema" in query.lower() or "relato do consumidor" in query.lower():
+        problem_description = re.findall(r'descrição do problema\s*[:\s]*([\s\S]+?)(?=\s*(?:pedido|sem mais))', extracted_text)
+        if problem_description:
+            results.append(f"Descrição do Problema: {problem_description[0].strip()}")
+
+    # Busca por pedido do consumidor
+    if "pedido" in query.lower():
+        request = re.findall(r'pedido\s*[:\s]*([\s\S]+?)(?=\s*assim sendo)', extracted_text)
+        if request:
+            results.append(f"Pedido do Consumidor: {request[0].strip()}")
+
+    # Busca por data de emissão
+    if "data de emissão" in query.lower():
+        emission_date = re.findall(r'emissão:\s*(\d{2}/\d{2}/\d{4})', extracted_text)
+        if emission_date:
+            results.append(f"Data de Emissão: {emission_date[0]}")
+
     if "valor" in query.lower():
         value = re.findall(r'valor total:\s*r\$\s?(\d{1,3}(?:\.\d{3})*,\d{2})', extracted_text)
         if value:
             results.append(f"Valor Total: R$ {value[0]}")
 
-    # Busca por data de emissão
-    if "data de emissão" in query.lower():
-        emission_date = re.findall(r'data\s*da\s*emissão\s*(\d{2}/\d{2}/\d{4})', extracted_text)
-        if emission_date:
-            results.append(f"Data de Emissão: {emission_date[0]}")
+    # Busca por detalhes do pagamento
+    if "forma de pagamento" in query.lower():
+        payment_method = re.findall(r'forma de pagamento\s*[:\s]*([\s\S]+?)(?=\s*valor)', extracted_text)
+        if payment_method:
+            results.append(f"Forma de Pagamento: {payment_method[0].strip()}")
 
     # Busca por destinatário (Nome e Endereço)
     if "destinatário" in query.lower():
-        recipient_name = re.findall(r'destinatário\s*\/\s*remetente\s*nome\s*\/\s*razão social\s*(.*?)(?=\s*cnpj)', extracted_text)
+        recipient_name = re.findall(r'destinatário:\s*(.*?)(?=\s*-)', extracted_text)
         recipient_address = re.findall(r'endereço\s*(.*?)(?=\s*cep)', extracted_text)
         if recipient_name and recipient_address:
             results.append(f"Destinatário: {recipient_name[0].strip()}")
             results.append(f"Endereço: {recipient_address[0].strip()}")
-
-    # Busca por forma de pagamento
-    if "forma de pagamento" in query.lower():
-        payment_method = re.findall(r'forma\s*de\s*pagamento\s*[:\-]?\s*(\S+)', extracted_text)
-        if payment_method:
-            results.append(f"Forma de Pagamento: {payment_method[0]}")
 
     # Busca por chave de acesso
     if "chave de acesso" in query.lower():
@@ -126,7 +172,7 @@ def search_information(extracted_text, query):
 
     # Busca por produtos e valores
     if "produtos" in query.lower():
-        products = re.findall(r"CÓDIGO\s*PRODUTO\s*(\S+)[\s\S]*?DESCRIÇÃO\s*DO\s*PRODUTO\s*\/\s*SERVIÇO\s*(.*?)\s*NCM/SH\s*(\S+)\s*UN\s*(\S+)\s*QUANT\s*(\S+)\s*VALOR\s*UNIT\s*(\S+)\s*VALOR\s*TOTAL\s*(\S+)", extracted_text)
+        products = re.findall(r"CÓDIGO PRODUTO\s*(\S+)[\s\S]*?DESCRIÇÃO DO PRODUTO \/ SERVIÇO\s*(.*?)\s*NCM/SH\s*(\S+)\s*UN\s*(\S+)\s*QUANT\s*(\S+)\s*VALOR UNIT\s*(\S+)\s*VALOR TOTAL\s*(\S+)", extracted_text)
         if products:
             for product in products:
                 results.append(f"Produto: {product[1]} (Código: {product[0]}, NCM/SH: {product[2]}, Quantidade: {product[4]}, Valor Unitário: {product[5]}, Valor Total: {product[6]})")
@@ -144,7 +190,6 @@ def search_information(extracted_text, query):
         return "Não foi possível encontrar as informações solicitadas."
 
     return ", ".join(results)
-
 
 # Rota de upload
 @app.route('/upload', methods=['POST'])
