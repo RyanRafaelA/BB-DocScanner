@@ -15,8 +15,8 @@ python -m spacy validate - Verificar a instalação
 
 INSTALAÇÕES NECESSARIAS:
 
-#instalar o Pillow pip 
-install pdf2image Pillow
+#instalar o Pillow  
+pip install pdf2image Pillow
 
 #instalar o PyMuPDF 
 pip install PyMuPDF
