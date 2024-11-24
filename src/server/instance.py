@@ -6,7 +6,7 @@ class Server():
         self.app = Flask(__name__)
         self.api = Api(self.app,
                        title='BB-DocScanner',
-                       description='Essa documentação tem como objetivo, trazer um guia para como o endpoint estão sendo usado e para que estão sendo usado.',
+                       description='Esta documentação tem como objetivo apresentar um guia detalhado sobre a utilização do endpoint, explicando seu propósito e funcionamento. O sistema permite o envio de arquivos e retorna as informações extraídas de seu conteúdo.',
                        doc='/docs'
                        )
     
