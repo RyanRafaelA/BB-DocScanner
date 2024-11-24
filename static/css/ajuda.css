@@ -1,7 +1,26 @@
+/* Fontes  */
+@font-face {
+    font-family: 'BancoDoBrasilTextos';
+    src: url('../font/BancoDoBrasilTextos-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'BancoDoBrasilTextos';
+    src: url('../font/BancoDoBrasilTextos-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'BancoDoBrasilTextos';
+    src: url('../font/BancoDoBrasilTextos-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
 /* Estilos Gerais */
 body {
     background-color: #000423;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
     margin: 0;
     color: #FFFFFF;
     overflow-x: hidden;
@@ -31,7 +50,7 @@ padding: 0;
 
 header h1 {
     font-size: 2rem;
-    font-family: "Montserrat", serif;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
     padding: 0;
     z-index: 1;
 }
@@ -44,7 +63,7 @@ header a {
     text-decoration: none;
     color: #FFFFFF;
     font-size: 1.5rem;
-    font-family: "Montserrat", serif;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
 }
 
 hr {
@@ -72,33 +91,53 @@ hr {
 
 .carrossel-content {
     position: absolute;
-    top: 50%;
-    left: 10%;
+    top: 45%;
+    left: 20%;
     transform: translateY(-50%);
     color: #FFFFFF;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
 }
 
 .carrossel-title {
-    font-size: 3.5rem;
+    font-size: 8rem;
     margin-bottom: 1rem;
+    line-height: 0.55;
+    color: #FCFC30;
 }
 
 .carrossel-description {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
+    margin-top: 6rem;
+    line-height: 0.75;
 }
+
+
 
 /* Seção de Perguntas (FAQ) */
 .faq-section {
-    max-width: 80%;
+    max-width: 60%;
     margin: 4rem auto;
-    text-align: center;
+    text-align: left;
+    position: relative;
 }
 
 .faq-section h2 {
-    font-size: 2.5rem;
+    font-size: 4rem;
     color: #FCFC30;
-    margin-bottom: 2.5rem;
+    margin-bottom: 6rem;
+    position: relative;
+    display: inline-block;
+}
+
+.faq-section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: #467DC3;
+    z-index: -1;
 }
 
 .faq-item {
@@ -121,7 +160,7 @@ hr {
 }
 
 .faq-question h3 {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -147,9 +186,7 @@ hr {
     transform: rotate(180deg);
 }
 
-
 /* parte do rodapé */
-
 footer {
     background-color: #FCFB2F;
     height: 5rem;
@@ -162,7 +199,7 @@ footer {
 }
 
 .infomacoes-footer h1{
-    font-family: "Montserrat", serif;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
     font-weight: 400;
     font-size: 1.3rem;
     display: flex;
@@ -182,7 +219,7 @@ footer {
 }
 
 .termos-e-responsabilidades h1{
-    font-family: "Montserrat", serif;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
     font-weight: 400;
     font-size: 1.3rem;
     color: #000423;
@@ -200,7 +237,7 @@ footer {
 }
 
 .Código-de-Ética-e-Normas-de-Conduta h1{
-    font-family: "Montserrat", serif;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
     font-weight: 400;
     font-size: 1.3rem;
     color: #000423;
@@ -220,5 +257,82 @@ footer {
 
     .faq-item {
         padding: 1.5rem;
+    }
+}
+
+/* Responsividade Carrossel */
+@media (max-width: 1200px) {
+    .carrossel-content {
+        left: 15%;
+    }
+
+    .carrossel-title {
+        font-size: 6rem;
+    }
+
+    .carrossel-description {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .carrossel-content {
+        left: 10%;
+    }
+
+    .carrossel-title {
+        font-size: 5rem;
+    }
+
+    .carrossel-description {
+        font-size: 1.8rem;
+        margin-top: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .carrossel-content {
+        left: 5%;
+    }
+
+    .carrossel-title {
+        font-size: 4rem;
+    }
+
+    .carrossel-description {
+        font-size: 1.6rem;
+        margin-top: 3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .carrossel-content {
+        left: 10%;
+        top: 50%;
+    }
+
+    .carrossel-title {
+        font-size: 3.5rem;
+    }
+
+    .carrossel-description {
+        font-size: 1.4rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .carrossel-content {
+        left: 5%;
+        top: 55%;
+    }
+
+    .carrossel-title {
+        font-size: 3rem;
+    }
+
+    .carrossel-description {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
     }
 }
