@@ -1,5 +1,6 @@
 import pytesseract
 import PyPDF2
+from pathlib import Path
 
 # Função para ler imagens com Tesseract
 def read_image(file_path):
@@ -16,9 +17,11 @@ def read_pdf(file_path):
     
 # Função principal para processar arquivos
 def process_file(file_path):
-    if file_path.endswith(('.png', '.jpg', '.jpeg')):
+    path = Path(file_path)
+    
+    if path.suffix in ('.png', '.jpg', '.jpeg'):
         return read_image(file_path)
-    elif file_path.endswith('.pdf'):
+    elif path.suffix in '.pdf':
         return read_pdf(file_path)
     else:
         return "Formato de arquivo não suportado."

@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_restx import Api, Resource
+from werkzeug.datastructures import FileStorage
 import os
 
 from src.server.instance import server
@@ -15,9 +16,15 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
 # Criando a pasta de uploads se não existir
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
+    
+document = api.parser()
+document.add_argument('file', type=FileStorage, location='files')
+document.add_argument('message', type=str, location='form')
 
+#O endpoint que vai receber um arquivo e uma mensagem.
 @api.route('/scan', endpoint='scanner')
 class Scan(Resource):
+    @api.expect(document)
     def post(self):
         if 'file' not in request.files or 'message' not in request.form:
             return 'Nenhum chave file ou message foi fornecido.', 400
