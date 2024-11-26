@@ -18,13 +18,25 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
     
 document = api.parser()
-document.add_argument('file', type=FileStorage, location='files')
-document.add_argument('message', type=str, location='form')
+document.add_argument('file', type=FileStorage, location='files', required=True)
+document.add_argument('message', type=str, location='form', required=True)
 
 #O endpoint que vai receber um arquivo e uma mensagem.
 @api.route('/scan', endpoint='scanner')
 class Scan(Resource):
-    @api.expect(document)
+    @api.expect(document, validate=True)
+    @api.doc(
+        params={
+            'file': {'description':'Arquivo que vai ser analisado'},
+            'message': {'description':'O que vai ser encontrado no arquivo'}
+        },
+        body={
+            'example':{
+                'file': './uploads/1727552647248.pdf',
+                'message': 'Nome do Recebedor'
+            }
+        }
+    )
     def post(self):
         if 'file' not in request.files or 'message' not in request.form:
             return 'Nenhum chave file ou message foi fornecido.', 400
@@ -36,7 +48,7 @@ class Scan(Resource):
             return 'Nenhuma mensagem e arquivo foi enviada.', 400
 
         if file:
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.name)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(file_path)
 
             # Realizar OCR no arquivo

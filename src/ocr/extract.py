@@ -19,9 +19,11 @@ def read_pdf(file_path):
 def process_file(file_path):
     path = Path(file_path)
     
-    if path.suffix in ('.png', '.jpg', '.jpeg'):
+    extension = path.suffix.lower()
+    
+    if extension in ['.jpg', 'jpeg', '.png']:
         return read_image(file_path)
-    elif path.suffix in '.pdf':
+    elif extension == '.pdf':
         return read_pdf(file_path)
     else:
-        return "Formato de arquivo não suportado."
+        return f"Formato de arquivo {extension} não suportado."
