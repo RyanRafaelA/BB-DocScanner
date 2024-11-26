@@ -1,55 +1,8 @@
-from flask import Flask, request, render_template, send_from_directory
-import pytesseract
-import PyPDF2
-from werkzeug.utils import secure_filename
-import os
 import re
 import spacy
 
-# Inicializando a aplicação Flask
-app = Flask(__name__)
-
-# Definindo a pasta para uploads
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
-
-# Criando a pasta de uploads se não existir
-if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    os.makedirs(app.config['UPLOAD_FOLDER'])
-
 # Carregando o modelo de linguagem da spaCy
 nlp = spacy.load("pt_core_news_sm")
-
-# Rota para a página principal que exibe o formulário
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-# Rota para servir arquivos estáticos
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
-
-# Função para ler imagens com Tesseract
-def read_image(file_path):
-    return pytesseract.image_to_string(file_path)
-
-# Função para ler PDFs com PyPDF2
-def read_pdf(file_path):
-    with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        text = ''
-        for page in reader.pages:
-            text += page.extract_text()
-        return text
-
-# Função principal para processar arquivos
-def process_file(file_path):
-    if file_path.endswith(('.png', '.jpg', '.jpeg')):
-        return read_image(file_path)
-    elif file_path.endswith('.pdf'):
-        return read_pdf(file_path)
-    else:
-        return "Formato de arquivo não suportado."
 
 # Função para buscar informações no texto extraído
 def search_information(extracted_text, query):
@@ -190,29 +143,3 @@ def search_information(extracted_text, query):
         return "Não foi possível encontrar as informações solicitadas."
 
     return ", ".join(results)
-
-# Rota de upload
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'file' not in request.files or 'message' not in request.form:
-        return 'Nenhum arquivo ou mensagem fornecido.', 400
-
-    file = request.files['file']
-    message = request.form['message']
-
-    if file:
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
-
-        # Realizar OCR no arquivo
-        extracted_text = process_file(file_path)
-
-        # Filtrar a informação baseada na mensagem do usuário
-        requested_info = search_information(extracted_text, message)
-
-        # Exibir o resultado em outra página HTML
-        return render_template('result.html', result=requested_info)
-
-if __name__ == '__main__':
-    app.run(debug=True)
