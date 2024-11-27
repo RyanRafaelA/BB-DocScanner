@@ -1,1 +1,1 @@
-web: echo "Starting app with gunicorn..." && gunicorn -b 0.0.0.0:$PORT src.server.instance:server
+web: python src/server/instance.py
