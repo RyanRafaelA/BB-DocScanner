@@ -61,4 +61,4 @@ class Scan(Resource):
             requested_info = search_information(extracted_text, message)
 
             # Exibir o resultado
-            return requested_info, 200
+            return {'result' : requested_info}, 200
