@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restx import Api
+from flask_cors import CORS
 
 class Server():
     def __init__(self):
@@ -11,6 +12,7 @@ class Server():
                        )
     
     def run(self):
+        CORS(self.app)
         self.app.run(debug=True)
         
 server = Server()
