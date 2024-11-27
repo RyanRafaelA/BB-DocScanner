@@ -1,0 +1,337 @@
+/* Fontes  */
+@font-face {
+    font-family: 'BancoDoBrasilTextos';
+    src: url('font/BancoDoBrasilTextos-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'BancoDoBrasilTextos';
+    src: url('font/BancoDoBrasilTextos-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'BancoDoBrasilTextos';
+    src: url('font/BancoDoBrasilTextos-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+/* Config */
+body {
+    background-color: #000423;
+    margin: 0;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+}
+
+:root {
+    font-size: 62.5%;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: none; 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FFFFFF;
+    border-radius: 10px; 
+}
+
+
+/* header  */
+header {
+    color: #FFFFFF;
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+    align-items: center;
+}
+
+#img1-header{
+padding: 0;
+}
+
+#img1-header img{
+    width: 3.5rem;
+    z-index: 1;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    padding: 0;
+    z-index: 1;
+}
+
+header h1:hover{
+    color: #FCFC30;
+}
+
+header a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+}
+
+hr {
+    border: none;
+    height: 0.5rem;
+    background-color: #FCFC30;
+    margin: 0;
+}
+
+/*menu-hamburguer */
+.off-screen-menu {
+    background-color: #012244;
+    z-index: 2;
+    height: 100vh;
+    width: 30rem;
+    position: fixed;
+    top: 0;
+    right: -450px;
+    display: flex;
+    font-size: 1rem;
+    transition: .3s ease;
+}
+
+.off-screen-menu ul {
+    list-style-type: none;
+    margin-top: 5rem;
+    width: 100%;
+}
+
+.off-screen-menu li {
+    width: 100%;
+}
+
+.off-screen-menu a {
+    display: block;
+    padding: 20px;
+    align-items: center;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align:left;
+}
+
+.off-screen-menu a:hover {
+    color: #FCFC30;
+}
+
+.divisor-menu {
+    width: 100%;
+    height: 8px;
+    background-color: #FCFC30;
+    
+}
+
+.off-screen-menu.active {
+    left: 0;
+}
+
+.ham-menu {
+    height: 25px;
+    width: 25px;
+    transition: 1s;
+    z-index: 3;
+    padding: 0;
+    position: relative;
+}
+
+.ham-menu span:hover{
+    background-color: #FCFC30;
+}
+
+.ham-menu span {
+    height: 3px;
+    width: 90%;
+    background-color: #FFFFFF;
+    border-radius: 45px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .3s ease;
+}
+
+.ham-menu span:nth-child(1) {
+    top: 25%;
+}
+
+.ham-menu span:nth-child(3) {
+    top: 75%;
+}
+
+.ham-menu.active span:nth-child(1) {
+    background-color: #FCFC30;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.ham-menu.active span:nth-child(3) {
+    background-color: #FCFC30;
+    top: 40%;
+    transform: translate(-50%, 50%) rotate(-45deg);
+}
+
+/* pagina principal de upload  */
+.page-upload {
+    margin-left: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.informacoes{
+    margin-top: 2.5rem;
+}
+
+.titulo h1 {
+    color: #FCFC30;
+    font-size: 3rem;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+}
+
+.descricao h1 {
+    color: #FFFFFF;
+    font-size: 2rem;
+    width: 60rem;
+    font-weight: 200;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+}
+
+.descricao h1 span {
+    color: #FCFC30;
+}
+
+.img-principal img {
+    width: 60rem;
+}
+
+form {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FCFC30;
+    border-radius: 5px;
+    padding: 10px;
+    color: #FCFC30;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    cursor: pointer;
+    display: block;
+    width: 30rem;
+    transition: 1s;
+    height: 15rem;
+}
+
+input[type="file"]:hover{
+    border: 2px solid #467DC3;
+}
+
+form button {
+    width: 32.5rem;
+    color: #ffff00;
+    background-color: #467DC3;
+    height: 3rem;
+    border-radius: 0.8rem;
+    transition: 0.5s;
+    border: none;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+}
+
+form button:hover{
+    background-color: #FCFB2F;
+    color: #000423;
+}
+
+#message{
+    resize: none;
+    width: 31rem;
+    border: 2px solid #FCFC30;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #FCFC30;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    padding: 0.5rem;
+}
+
+#message:focus {
+    border-color: #467DC3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, .6); /* Sombra ao redor */
+}
+
+
+/* parte do rodapé */
+
+footer {
+    background-color: #FCFB2F;
+    height: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.infomacoes-footer h1{
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    color: #000423;
+}
+
+.termos-e-responsabilidades{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.termos-e-responsabilidades img{
+    width: 2rem;
+    height: 2rem;
+}
+
+.termos-e-responsabilidades h1{
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #000423;
+}
+
+.Código-de-Ética-e-Normas-de-Conduta{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Código-de-Ética-e-Normas-de-Conduta img{
+    width: 2rem;
+    height: 2rem;
+}
+
+.Código-de-Ética-e-Normas-de-Conduta h1{
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #000423;
+}

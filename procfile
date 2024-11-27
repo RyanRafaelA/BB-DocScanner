@@ -1,0 +1,1 @@
+web: echo "Render test" && python main.py
