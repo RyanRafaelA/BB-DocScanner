@@ -1,19 +1,19 @@
 /* Fontes  */
 @font-face {
     font-family: 'BancoDoBrasilTextos';
-    src: url('../font/BancoDoBrasilTextos-Bold.ttf') format('truetype');
+    src: url('font/BancoDoBrasilTextos-Bold.ttf') format('truetype');
     font-weight: bold;
 }
 
 @font-face {
     font-family: 'BancoDoBrasilTextos';
-    src: url('../font/BancoDoBrasilTextos-Medium.ttf') format('truetype');
+    src: url('font/BancoDoBrasilTextos-Medium.ttf') format('truetype');
     font-weight: 500;
 }
 
 @font-face {
     font-family: 'BancoDoBrasilTextos';
-    src: url('../font/BancoDoBrasilTextos-Regular.ttf') format('truetype');
+    src: url('font/BancoDoBrasilTextos-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 

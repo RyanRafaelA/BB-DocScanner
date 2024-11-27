@@ -9,7 +9,7 @@ document.getElementById('uploadForm').addEventListener('submit', async(e) =>{
     formData.append('message', message.value);
 
     try{
-        const response = await fetch('https://<domínio>.onrender.com/scan', { // Atualizar com seu domínio Render
+        const response = await fetch('https://techdoc.onrender.com/scan', { 
             method: 'POST',
             body: formData
         });

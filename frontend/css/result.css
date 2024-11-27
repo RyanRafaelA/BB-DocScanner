@@ -1,27 +1,26 @@
 /* Fontes  */
 @font-face {
     font-family: 'BancoDoBrasilTextos';
-    src: url('../font/BancoDoBrasilTextos-Bold.ttf') format('truetype');
+    src: url('font/BancoDoBrasilTextos-Bold.ttf') format('truetype');
     font-weight: bold;
 }
 
 @font-face {
     font-family: 'BancoDoBrasilTextos';
-    src: url('../font/BancoDoBrasilTextos-Medium.ttf') format('truetype');
+    src: url('font/BancoDoBrasilTextos-Medium.ttf') format('truetype');
     font-weight: 500;
 }
 
 @font-face {
     font-family: 'BancoDoBrasilTextos';
-    src: url('../font/BancoDoBrasilTextos-Regular.ttf') format('truetype');
+    src: url('font/BancoDoBrasilTextos-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 
-/* Config */
+/*Config*/
 body {
     background-color: #000423;
     margin: 0;
-    font-family: 'BancoDoBrasilTextos', sans-serif;
 }
 
 :root {
@@ -54,14 +53,15 @@ header {
 }
 
 #img1-header{
-padding: 0;
-}
-
+    padding: 0;
+    margin: 0;
+    }
+    
 #img1-header img{
     width: 3.5rem;
     z-index: 1;
-}
-
+    }
+    
 header h1 {
     font-size: 2rem;
     font-family: 'BancoDoBrasilTextos', sans-serif;
@@ -184,111 +184,175 @@ hr {
     transform: translate(-50%, 50%) rotate(-45deg);
 }
 
-/* pagina principal de upload  */
-.page-upload {
+/* Section que engloba todas as funcionalidades */
+
+.fundo-azul {
+    background-color: #012244 ;
+    color: #FCFB2F;
+    padding: 10rem;
+}
+
+/* titulo de resultados  */
+.resultados-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    font-size: 2.4rem;
+    text-align:left;
+    margin-bottom: 40px;
+    margin-left: 2rem;
+    
+}
+
+/* titulo que vai encima da pagina onde será exibida o resultados  */
+
+.titulo-info {
+    display: flex;
+    align-items: center;
+    margin-left: 12rem;
+    margin-top: 4rem;
+    gap: 1rem;
+}
+
+.titulo-info h2 {
+    font-size: 1.8rem;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    margin: 0;
+    
+}
+
+.titulo-info img {
+    margin: 0;
+    width: 3rem;
+    height: auto;
     margin-left: 5rem;
-    display: flex;
-    justify-content: space-evenly;
+    
 }
 
-.informacoes{
-    margin-top: 2.5rem;
+/* Quadrado onde ficaram os resultados  */
+.info-documento {
+    background-color: #063D75;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 72rem;
+    height: 5rem;
+    margin: 10px;
+    margin-left: 17rem;
+    border: 2px solid #FCFB2F;
 }
 
-.titulo h1 {
-    color: #FCFC30;
-    font-size: 3rem;
+.info-documento p{
     font-family: 'BancoDoBrasilTextos', sans-serif;
+    font-size: 1.5rem;
 }
 
-.descricao h1 {
+.info-documento h2, img {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-bottom: 1rem;
+
+}
+
+.caixa-texto img {
+    display: flex;
+    margin: 0;
+
+}
+
+.caixa-texto button {
+    padding: 0;
+}
+
+
+ input {
+    width: 70%;
+    padding: 0.8rem;
+    border: 2px solid #FCFB2F;
+    border-radius: 0.4rem ;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 15rem;
+    background-color: transparent;
     color: #FFFFFF;
-    font-size: 2rem;
-    width: 60rem;
-    font-weight: 200;
-    font-family: 'BancoDoBrasilTextos', sans-serif;
+    
 }
 
-.descricao h1 span {
-    color: #FCFC30;
+input::placeholder {
+    color: #FCFB2F;
+    opacity: 0.4;
 }
 
-.img-principal img {
-    width: 60rem;
-}
-
-form {
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-}
-
-input[type="file"] {
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #FCFC30;
-    border-radius: 5px;
-    padding: 10px;
-    color: #FCFC30;
-    font-family: 'BancoDoBrasilTextos', sans-serif;
-    cursor: pointer;
-    display: block;
-    width: 30rem;
-    transition: 1s;
-    height: 15rem;
-}
-
-input[type="file"]:hover{
-    border: 2px solid #467DC3;
-}
-
-form button {
-    width: 32.5rem;
-    color: #ffff00;
-    background-color: #467DC3;
-    height: 3rem;
-    border-radius: 0.8rem;
-    transition: 0.5s;
-    border: none;
-    font-family: 'BancoDoBrasilTextos', sans-serif;
-}
-
-form button:hover{
-    background-color: #FCFB2F;
-    color: #000423;
-}
-
-#message{
-    resize: none;
-    width: 31rem;
-    border: 2px solid #FCFC30;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #FCFC30;
-    font-family: 'BancoDoBrasilTextos', sans-serif;
-    padding: 0.5rem;
-}
-
-#message:focus {
+input:focus {
     border-color: #467DC3;
     outline: none;
-    box-shadow: 0 0 5px rgba(102, 175, 233, .6); /* Sombra ao redor */
 }
 
+ .input-button {
+    background-color: transparent;
+    border: none;
+    padding: 0.8rem;
+    cursor: pointer;
+}
 
-/* parte do rodapé */
+.input-button:hover {
+    background-color: #032f5c;
+    border-radius: 6rem;
+    
+}
 
+.caixa-texto {
+    display:flex;
+    height: 40px;
+    gap: 1rem;
+    margin-left: 2rem;
+}
+
+.botoes {
+    display:flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    margin-left: 17rem;
+    
+}
+
+.botoes button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre o ícone e o texto */
+    background-color: #467DC3;
+    color: #FCFB2F;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-family: 'BancoDoBrasilTextos', sans-serif;
+    font-size: 1.6rem;
+}
+
+.botoes button img {
+    width: 2.2rem; 
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.botoes button:hover {
+    background-color: #032f5c; 
+    border-radius: 0.9rem;
+}
+
+/* Footer */
 footer {
     background-color: #FCFB2F;
     height: 5rem;
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 .infomacoes-footer h1{
@@ -298,6 +362,7 @@ footer {
     display: flex;
     align-items: center;
     color: #000423;
+    
 }
 
 .termos-e-responsabilidades{
@@ -309,6 +374,7 @@ footer {
 .termos-e-responsabilidades img{
     width: 2rem;
     height: 2rem;
+    margin: 0;
 }
 
 .termos-e-responsabilidades h1{
@@ -327,6 +393,7 @@ footer {
 .Código-de-Ética-e-Normas-de-Conduta img{
     width: 2rem;
     height: 2rem;
+    margin: 0;
 }
 
 .Código-de-Ética-e-Normas-de-Conduta h1{
@@ -335,3 +402,5 @@ footer {
     font-size: 1.3rem;
     color: #000423;
 }
+
+
