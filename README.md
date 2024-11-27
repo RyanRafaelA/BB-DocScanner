@@ -13,7 +13,7 @@ Este repositório refere-se a um projeto de residência acadêmica em parceria c
 
 ## Instalação
 
-Para fazer as apliações funcionarem, utilizamos o venv.
+Para fazer as aplicações funcionarem, utilizamos o venv.
 ```bash
   python -m venv .venv
 ```
@@ -27,7 +27,7 @@ Para a documentação da Api utilizamos flask restx.
 ```
 Para aceitar as requisições, utilizamos o flask cORS.
 ```bash
-    pip install spacy
+    pip install flask_cors
 ```
 Para digitalizar imagens, utilzanos o pytesseract.
 ```bash
@@ -41,6 +41,37 @@ Para processamento de linguagem natural, utilizamos o spacy.
 ```bash
     pip install spacy
 ```
+
+## Comandos de busca:
+
+```bash
+quem pagou
+quem recebeu
+todos os nomes
+cpf
+cnpj
+número da nota
+número nf
+telefone
+endereço
+e-mail
+número do protocolo
+nome do consumidor
+descrição do problema
+relato do consumidor
+pedido
+data de emissão
+valor
+forma de pagamento
+destinatário
+chave de acesso
+informações complementares
+produtos
+icms
+pis
+cofins
+```
+
 ## Documentação da API
 
 #### Para rodar o swagger do projeto:
