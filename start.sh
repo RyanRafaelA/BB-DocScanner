@@ -1,2 +1,3 @@
 #!/bin/bash
-python main.py
+echo "Starting Flask app"
+python3 main.py
