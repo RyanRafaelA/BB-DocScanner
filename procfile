@@ -1,1 +1,1 @@
-web: python -m src.server.instance
+web: python main.py
